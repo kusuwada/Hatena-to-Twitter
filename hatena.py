@@ -92,7 +92,7 @@ class Hatena:
         oldest_article_date = datetime.now(tz)
         target_entries = []
         articles = []
-        logger.info('Start Fetcing Articles [' + str(start_datetime) + '] to [' str(end_datetime) + ']')
+        logger.info('Start Fetcing Articles [' + str(start_datetime) + '] to [' + str(end_datetime) + ']')
 
         while start_datetime <= oldest_article_date:
             res = requests.get(url, headers={'X-WSSE': self.wsse})
