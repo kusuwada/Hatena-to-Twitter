@@ -3,11 +3,11 @@ on:
  workflow_dispatch:
    inputs:
      start:
-       description: 'Start Date'     
+       description: 'Start Date'
        required: true
        default: 'YYYY-MM-DD'
      end:
-       description: 'End Date'     
+       description: 'End Date'
        required: true
        default: 'YYYY-MM-DD'
 
