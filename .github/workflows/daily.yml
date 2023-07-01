@@ -1,0 +1,32 @@
+name: daily export
+on:
+  schedule:
+    - cron: '0 2 * * *'
+
+env:
+  TZ: 'Asia/Tokyo'
+  HT_ID: 'kusuwada'
+  HT_ROOT: 'kusuwada.hatenadiary.com'
+
+jobs:
+  daily:
+    name: Daily Export
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Time
+        run: echo "DATE=$(date --date '1 day ago' +'%Y-%m-%d')" >> $GITHUB_ENV
+      - name: Chekout
+        uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Run Main
+        run: |
+          export TW_ACCESS_TOKEN=${{ secrets.TW_ACCESS_TOKEN }}
+          export TW_ACCESS_TOKEN_SECRET=${{ secrets.TW_ACCESS_TOKEN_SECRET }}
+          export TW_API_KEY=${{ secrets.TW_API_KEY }}
+          export TW_API_KEY_SECRET=${{ secrets.TW_API_KEY_SECRET }}
+          export HT_KEY=${{ secrets.HT_KEY }}          
+          pip install -r requirements.txt
+          python main.py $DATE $DATE $HT_ID $HT_ROOT ${{ runner.temp }} --tz=$TZ
