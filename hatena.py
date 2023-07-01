@@ -96,9 +96,7 @@ class Hatena:
         while start_datetime <= oldest_article_date:
             res = requests.get(url, headers={'X-WSSE': self.wsse})
             root = ET.fromstring(res.text)
-            #print(ET.dump(root))
 
-            print('---------HATENA BLOG ARTICLES--------')
             links = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}link')
             entries = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}entry')
 
@@ -108,7 +106,7 @@ class Hatena:
                 oldest_article_date = self.return_published_date(entry)
                 if self.is_in_period(oldest_article_date, start_datetime, end_datetime):
                     target_entries.append(entry)
-            print(f'until {oldest_article_date} - articles: {len(target_entries)}')
+            logger.info(f'until {oldest_article_date} - articles: {len(target_entries)}')
         
         for entry in target_entries:
             article = Article()

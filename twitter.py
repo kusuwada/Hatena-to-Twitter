@@ -66,7 +66,6 @@ class Twitter:
         previous_tweet_id = None
         for article in articles:
             texts = self.divide_text_by_count(article.content)
-            print(texts)
             for tweet_idx, text in enumerate(texts):
                 if tweet_idx == 0:  # 1st tweet for 1 article
                     if len(article.image_urls) == 0:  # no image
