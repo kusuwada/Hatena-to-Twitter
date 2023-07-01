@@ -46,10 +46,13 @@ if __name__ == "__main__":
     parser.add_argument('--tz', help='timezone')
     args = parser.parse_args()
 
+    logger.info('exec information: [START]' + args.start)
+    logger.info('exec information: [END]' + args.end)
+
     ut = Util()
     for date in ut.daterange_to_list(args.start, args.end):
         try:
-            daily.daily(date, args.ht_id, args.ht_host, args.work_dir, args.tz)
+            main(date, args.ht_id, args.ht_host, args.work_dir, args.tz)
         except RequestExceededError as e:
             logger.error(e)
             sys.exit(1)
