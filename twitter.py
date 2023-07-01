@@ -12,7 +12,7 @@ logger = getLogger(__name__)
 
 class Twitter:
 
-    work_path = 'tmp'
+    work_path = None
     TWITTER_TEXT_LIMIT = 280
     
     def __init__(self):
@@ -61,7 +61,8 @@ class Twitter:
         texts.append(sub_text)
         return texts
 
-    def tweet_article(self, articles):
+    def tweet_article(self, articles, work_dir):
+        self.work_path = work_dir
         previous_tweet_id = None
         for article in articles:
             texts = self.divide_text_by_count(article.content)

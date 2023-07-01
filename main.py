@@ -19,8 +19,6 @@ def main(date, ht_id, ht_host, work_dir, tz='Etc/UTC'):
 
     ## set timezone
     Util.tz_str = tz
-    ## set tmp media filepath
-    media_path = work_dir
 
     logger.info('[START]' + date)
 
@@ -35,14 +33,13 @@ def main(date, ht_id, ht_host, work_dir, tz='Etc/UTC'):
     ## post to twitter
     tw = Twitter()
     tw.auth()
-    tw.tweet_article(articles)
+    tw.tweet_article(articles, work_dir)
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='export hatena to twitter.')
     parser.add_argument('start', help='start date to export. [YYYY-MM-DD]')
     parser.add_argument('end', help='end date to export. [YYYY-MM-DD]')
-    parser.add_argument('tw_id', help='Twitter name')
     parser.add_argument('ht_id', help='Hatena ID')
     parser.add_argument('ht_host', help='Hatena domain. e.g. example.hatenadiary.com')
     parser.add_argument('work_dir', help='working directory path')
