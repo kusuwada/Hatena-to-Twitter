@@ -9,6 +9,7 @@ from hatena import Hatena
 from twitter import Twitter
 from article import Article
 from util import Util
+from exception import RequestExceededError
 
 with open('log_config.yml', 'r') as f:
         log_config = yaml.safe_load(f.read())
@@ -25,7 +26,7 @@ def main(date, ht_id, ht_host, work_dir, tz='Etc/UTC'):
     ## fetch articles from hatena
     ht = Hatena(ht_id, ht_host)
     ht.auth()
-    articles = ht.fetch_my_article(start, end)
+    articles = ht.fetch_my_article(date, date)
     logger.info('Finish fetching target articles from Hatena. Number of articles: ' + str(len(articles)))
     for a in articles:
         logger.info(a)
