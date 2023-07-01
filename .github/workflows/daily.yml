@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Time
-        run: echo "DATE=$(date --date '1 day ago' +'%Y-%m-%d')" >> $GITHUB_ENV
+        run: echo "START=$(date --date '1 day ago' +'%Y-%m-%d')" >> $GITHUB_ENV
+        run: echo "END=$(date --date '%Y-%m-%d')" >> $GITHUB_ENV
       - name: Chekout
         uses: actions/checkout@v2
       - name: Set up Python
@@ -29,4 +30,4 @@ jobs:
           export TW_API_KEY_SECRET=${{ secrets.TW_API_KEY_SECRET }}
           export HT_KEY=${{ secrets.HT_KEY }}          
           pip install -r requirements.txt
-          python main.py $DATE $DATE $HT_ID $HT_ROOT ${{ runner.temp }} --tz=$TZ
+          python main.py $START $END $HT_ID $HT_ROOT ${{ runner.temp }} --tz=$TZ

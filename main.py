@@ -47,8 +47,7 @@ if __name__ == "__main__":
     parser.add_argument('--tz', help='timezone')
     args = parser.parse_args()
 
-    logger.info('exec information: [START]' + args.start)
-    logger.info('exec information: [END]' + args.end)
+    logger.info('exec information: [START]' + args.start + ', [END]' + args.end)
 
     ut = Util()
     for date in ut.daterange_to_list(args.start, args.end):
