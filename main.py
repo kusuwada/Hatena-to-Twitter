@@ -9,7 +9,6 @@ from hatena import Hatena
 from twitter import Twitter
 from article import Article
 from util import Util
-from exception import RequestExceededError
 
 with open('log_config.yml', 'r') as f:
         log_config = yaml.safe_load(f.read())
