@@ -4,16 +4,20 @@
 
 import os
 import re
+import yaml
 import requests
 import hashlib
 import random
 import base64
 import xml.etree.ElementTree as ET
-from logging import getLogger
+from logging import getLogger, config
 from datetime import datetime, timedelta, timezone
 from util import Util
 from article import Article
 
+with open('log_config.yml', 'r') as f:
+        log_config = yaml.safe_load(f.read())
+        config.dictConfig(log_config)
 logger = getLogger(__name__)
 
 class Hatena:
