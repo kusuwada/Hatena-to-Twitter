@@ -85,11 +85,15 @@ class Hatena:
         return re.sub(self.hatena_image_pattern, '', content)
 
     def fetch_my_article(self, start, end):
-        tz = timezone(timedelta(seconds=9 * 60 * 60))
-        start_datetime = self.convert_date_to_datetime(start, tz)
-        end_datetime = self.convert_date_to_datetime(end, tz)
-        url = self.root_endpoint + '/entry'
-        oldest_article_date = datetime.now(tz)
+        try:
+            tz = timezone(timedelta(seconds=9 * 60 * 60))
+            start_datetime = self.convert_date_to_datetime(start, tz)
+            end_datetime = self.convert_date_to_datetime(end, tz)
+            url = self.root_endpoint + '/entry'
+            oldest_article_date = datetime.now(tz)
+        except Exception as e:
+            logger.error(e)
+        
         target_entries = []
         articles = []
         logger.info('Start Fetcing Articles [' + str(start_datetime) + '] to [' + str(end_datetime) + ']')
