@@ -16,7 +16,7 @@ jobs:
       - name: Get Start Time
         run: echo "START=$(date --date '1 day ago' +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Get End Time
-        run: echo "END=$(date --date '%Y-%m-%d')" >> $GITHUB_ENV
+        run: echo "END=$(date '%Y-%m-%d')" >> $GITHUB_ENV
       - name: Chekout
         uses: actions/checkout@v2
       - name: Set up Python
