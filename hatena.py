@@ -15,9 +15,6 @@ from datetime import datetime, timedelta, timezone
 from util import Util
 from article import Article
 
-with open('log_config.yml', 'r') as f:
-        log_config = yaml.safe_load(f.read())
-        config.dictConfig(log_config)
 logger = getLogger(__name__)
 
 class Hatena:
@@ -88,11 +85,11 @@ class Hatena:
         m = pattern.search(content)
         return re.sub(self.hatena_image_pattern, '', content)
 
-    def fetch_my_article(self, start, end):
+    def fetch_my_article(self, date):
         try:
             tz = timezone(timedelta(seconds=9 * 60 * 60))
-            start_datetime = self.convert_date_to_datetime(start, tz)
-            end_datetime = self.convert_date_to_datetime(end, tz)
+            start_datetime = self.convert_date_to_datetime(date, tz)
+            end_datetime = start_datetime + timedelta(days=1)
             url = self.root_endpoint + '/entry'
             oldest_article_date = datetime.now(tz)
         except Exception as e:

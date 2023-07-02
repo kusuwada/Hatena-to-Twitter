@@ -26,16 +26,17 @@ def main(date, ht_id, ht_host, work_dir, tz='Etc/UTC'):
     ## fetch articles from hatena
     ht = Hatena(ht_id, ht_host)
     ht.auth()
-    articles = ht.fetch_my_article(date, date)
+    print(type(date))
+    articles = ht.fetch_my_article(date)
     logger.info('Finish fetching target articles from Hatena. Number of articles: ' + str(len(articles)))
     for a in articles:
         logger.info(a)
-
+"""
     ## post to twitter
     tw = Twitter()
     tw.auth()
     tw.tweet_article(articles, work_dir)
-
+"""
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='export hatena to twitter.')

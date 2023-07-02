@@ -9,9 +9,6 @@ import unicodedata
 from logging import getLogger, config
 from article import Article
 
-with open('log_config.yml', 'r') as f:
-        log_config = yaml.safe_load(f.read())
-        config.dictConfig(log_config)
 logger = getLogger(__name__)
 
 class Twitter:
