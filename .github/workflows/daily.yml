@@ -1,7 +1,7 @@
 name: daily export
 on:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '30 12 * * *'
 
 env:
   TZ: 'Asia/Tokyo'

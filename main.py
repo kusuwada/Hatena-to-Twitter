@@ -38,6 +38,8 @@ def main(date, ht_id, ht_host, work_dir, tz='Etc/UTC'):
 
 if __name__ == "__main__":
 
+    logger.info(sys.argv)
+
     parser = argparse.ArgumentParser(description='export hatena to twitter.')
     parser.add_argument('start', help='start date to export. [YYYY-MM-DD]')
     parser.add_argument('end', help='end date to export. [YYYY-MM-DD]')
