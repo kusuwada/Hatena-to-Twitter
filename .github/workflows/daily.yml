@@ -1,7 +1,7 @@
 name: daily export
 on:
   schedule:
-    - cron: '30 12 * * *'
+    - cron: '40 12 * * *'
 
 env:
   TZ: 'Asia/Tokyo'
@@ -16,7 +16,7 @@ jobs:
       - name: Get Start Time
         run: echo "START=$(date --date '1 day ago' +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Get End Time
-        run: echo "END=$(date '%Y-%m-%d')" >> $GITHUB_ENV
+        run: echo "END=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Chekout
         uses: actions/checkout@v2
       - name: Set up Python
