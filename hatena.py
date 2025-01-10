@@ -102,12 +102,10 @@ class Hatena:
         while start_datetime <= oldest_article_date:
             res = requests.get(url, headers={'X-WSSE': self.wsse})
             root = ET.fromstring(res.text)
-            print(res.text)
-            print(root)
 
-            #links = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}link')
+            links = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}link')
             entries = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}entry')
-            logger.info(f'entries: {len(entries)}')
+            logger.info(f'links:{links}, entries: {len(entries)}')
 
             for entry in entries:
                 if self.is_draft(entry):
