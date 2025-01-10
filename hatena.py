@@ -101,26 +101,18 @@ class Hatena:
         logger.info('Start Fetcing Articles [' + str(start_datetime) + '] to [' + str(end_datetime) + ']')
 
         while start_datetime <= oldest_article_date:
-        #for i in range(1):
             if page:
                 url = original_url + '?page=' + page
             else:
                 url = original_url
             res = requests.get(url, headers={'X-WSSE': self.wsse})
             root = ET.fromstring(res.text)
-
             links = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}link')
-            #print(links)
             for link in links:
-                #print(link.attrib)
                 if 'next' == link.attrib['rel']:
-                    #print('good!')
-                    #print(link.attrib['href'])
                     page = (link.attrib['href'].split('page='))[1]
-                    print(f'page: {page}')
                     
             entries = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}entry')
-            logger.info(f'links:{links}, entries: {len(entries)}')
 
             for entry in entries:
                 if self.is_draft(entry):
@@ -128,7 +120,6 @@ class Hatena:
                 article_date = self.return_published_date(entry)
                 if oldest_article_date > article_date:
                     oldest_article_date = article_date
-                    logger.info(f'[TEST2 LOG] oldest: {oldest_article_date} - start: {start_datetime} - current: {article_date}')
                 if self.is_in_period(oldest_article_date, start_datetime, end_datetime):
                     target_entries.append(entry)
             logger.info(f'until {oldest_article_date} - articles: {len(target_entries)}')
