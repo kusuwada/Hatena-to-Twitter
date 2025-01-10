@@ -32,9 +32,9 @@ def main(date, ht_id, ht_host, work_dir, tz='Etc/UTC'):
         logger.info(a)
 
     ## post to twitter
-    #tw = Twitter()
-    #tw.auth()
-    #tw.tweet_article(articles, work_dir)
+    tw = Twitter()
+    tw.auth()
+    tw.tweet_article(articles, work_dir)
 
 if __name__ == "__main__":
 
