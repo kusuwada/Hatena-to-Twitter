@@ -108,7 +108,7 @@ class Hatena:
             #print(links)
             for link in links:
                 #print(link.attrib)
-                if 'next' == link.attrib['rel']
+                if 'next' == link.attrib['rel']:
                     print('good!')
                     print(link.attrib['href'])
             
