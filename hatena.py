@@ -100,7 +100,7 @@ class Hatena:
         logger.info('Start Fetcing Articles [' + str(start_datetime) + '] to [' + str(end_datetime) + ']')
 
         ##while start_datetime <= oldest_article_date:
-        for i in 1:
+        for i in range(1):
             res = requests.get(url, headers={'X-WSSE': self.wsse})
             root = ET.fromstring(res.text)
 
