@@ -92,7 +92,7 @@ class Hatena:
             end_datetime = start_datetime + timedelta(days=1)
             original_url = self.root_endpoint + '/entry'
             oldest_article_date = datetime.now(tz)
-            page = none
+            page = None
         except Exception as e:
             logger.error(e)
         
