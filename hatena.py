@@ -105,8 +105,7 @@ class Hatena:
 
             links = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}link')
             entries = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}entry')
-
-            logger.info(f'[TEST1 LOG] oldest: {oldest_article_date}')
+            logger.info(f'entries: {len(entries)}')
 
             for entry in entries:
                 if self.is_draft(entry):
@@ -114,7 +113,7 @@ class Hatena:
                 article_date = self.return_published_date(entry)
                 if oldest_article_date > article_date:
                     oldest_article_date = article_date
-                    logger.info(f'[TEST2 LOG] oldest: {oldest_article_date} - current: {article_date}')
+                    logger.info(f'[TEST2 LOG] oldest: {oldest_article_date} - start: {start_datetime} - current: {article_date}')
                 if self.is_in_period(oldest_article_date, start_datetime, end_datetime):
                     target_entries.append(entry)
             logger.info(f'until {oldest_article_date} - articles: {len(target_entries)}')
