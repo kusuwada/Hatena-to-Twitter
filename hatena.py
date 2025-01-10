@@ -99,17 +99,17 @@ class Hatena:
         articles = []
         logger.info('Start Fetcing Articles [' + str(start_datetime) + '] to [' + str(end_datetime) + ']')
 
-        while start_datetime <= oldest_article_date:
+        ##while start_datetime <= oldest_article_date:
+        for i in 1:
             res = requests.get(url, headers={'X-WSSE': self.wsse})
             root = ET.fromstring(res.text)
 
             links = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}link')
             print(links)
             for link in links:
-                print('****')
-                print(link.tag)
-                print('+++')
-                print(link.attrib)
+                    print(link.attrib)
+                if 'next' in link.attrib:
+                    print(link.attrib['href'])
             
             entries = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}entry')
             logger.info(f'links:{links}, entries: {len(entries)}')
