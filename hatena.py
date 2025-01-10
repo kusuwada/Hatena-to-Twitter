@@ -104,7 +104,7 @@ class Hatena:
             root = ET.fromstring(res.text)
 
             links = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}link')
-            print(links.text)
+            print(links)
             for link in links:
                 print('****')
                 print(type(link))
