@@ -110,7 +110,7 @@ class Hatena:
                 if self.is_draft(entry):
                     continue
                 article_date = self.return_published_date(entry)
-                logger.info(f'[TEST1 LOG] oldest: {oldest_article_date} - current: {len(article_date)}')
+                logger.info(f'[TEST1 LOG] oldest: {oldest_article_date})
                 if oldest_article_date < article_date:
                     oldest_article_date = article_date
                     logger.info(f'[TEST2 LOG] oldest: {oldest_article_date} - current: {len(article_date)}')
