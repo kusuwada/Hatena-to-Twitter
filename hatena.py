@@ -90,8 +90,9 @@ class Hatena:
             tz = timezone(timedelta(seconds=9 * 60 * 60))
             start_datetime = self.convert_date_to_datetime(date, tz)
             end_datetime = start_datetime + timedelta(days=1)
-            url = self.root_endpoint + '/entry'
+            original_url = self.root_endpoint + '/entry'
             oldest_article_date = datetime.now(tz)
+            page = none
         except Exception as e:
             logger.error(e)
         
@@ -99,8 +100,12 @@ class Hatena:
         articles = []
         logger.info('Start Fetcing Articles [' + str(start_datetime) + '] to [' + str(end_datetime) + ']')
 
-        ##while start_datetime <= oldest_article_date:
-        for i in range(1):
+        while start_datetime <= oldest_article_date:
+        #for i in range(1):
+            if page:
+                url = original_url + '?page=' + page
+            else:
+                url = original_url
             res = requests.get(url, headers={'X-WSSE': self.wsse})
             root = ET.fromstring(res.text)
 
@@ -109,9 +114,11 @@ class Hatena:
             for link in links:
                 #print(link.attrib)
                 if 'next' == link.attrib['rel']:
-                    print('good!')
-                    print(link.attrib['href'])
-            
+                    #print('good!')
+                    #print(link.attrib['href'])
+                    page = (link.attrib['href'].split('page='))[1]
+                    print(f'page: {page}')
+                    
             entries = self.select_elements_of_tag(root, '{http://www.w3.org/2005/Atom}entry')
             logger.info(f'links:{links}, entries: {len(entries)}')
 
