@@ -109,7 +109,9 @@ class Hatena:
             for entry in entries:
                 if self.is_draft(entry):
                     continue
-                oldest_article_date = self.return_published_date(entry)
+                article_date = self.return_published_date(entry)
+                if oldest_article_date < article_date:
+                    oldest_article_date = article_date
                 if self.is_in_period(oldest_article_date, start_datetime, end_datetime):
                     target_entries.append(entry)
             logger.info(f'until {oldest_article_date} - articles: {len(target_entries)}')
