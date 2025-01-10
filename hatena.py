@@ -107,7 +107,7 @@ class Hatena:
             print(links)
             for link in links:
                 print('****')
-                print(type(link))
+                print(link.tag, link.attrib)
                 print('+++')
                 print(link.text)
             
